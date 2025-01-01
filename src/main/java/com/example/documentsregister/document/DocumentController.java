@@ -16,7 +16,7 @@ public class DocumentController {
     private DocumentService documentService;
 
     @GetMapping("/get-by-type/{documentType}")
-    public ResponseEntity<Object> getAllDocumentsByType(String documentType){
+    public ResponseEntity<Object> getAllDocumentsByType(@PathVariable String documentType){
         try{
             return ResponseEntity.ok(documentService.getAllDocumentsByType(documentType));
         } catch (InvalidTypeException ex) {
@@ -36,7 +36,7 @@ public class DocumentController {
     }
 
     @PostMapping("/add-document")
-    public ResponseEntity<Object> addDocument(AddDocumentRequest request){
+    public ResponseEntity<Object> addDocument(@RequestBody AddDocumentRequest request){
         try{
             return ResponseEntity.ok(documentService.addDocument(request));
         } catch (DescriptionTooLongException | InvalidNameException | InvalidTypeException ex){
